@@ -36,17 +36,9 @@ public class IntegerTreeNode {
         if (n == value) {
             return true;
         } else if (n > value) {
-            if (right == null) {
-                return false;
-            } else {
-                return right.contains(n);
-            }
+            return right != null && right.contains(n);
         } else {
-            if (left == null) {
-                return false;
-            } else {
-                return left.contains(n);
-            }
+            return left != null && left.contains(n);
         }
     }
 
@@ -64,5 +56,9 @@ public class IntegerTreeNode {
         } else {
             return left.getMin();
         }
+    }
+
+    public String toString() {
+        return "[" + value + " L" + (left != null ? left : "[]") + " R" + (right != null ? right : "[]") + "]";
     }
 }
