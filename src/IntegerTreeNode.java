@@ -58,7 +58,14 @@ public class IntegerTreeNode {
         }
     }
 
-    public String toString() {
+    // Question 1.2 asks for this complicated version first
+    /*public String toString() {
         return "[" + value + " L" + (left != null ? left : "[]") + " R" + (right != null ? right : "[]") + "]";
+    }*/
+
+    // Question 1.2 then wants this simplified version
+    public String toString() {
+        return "[" + value + (left != null ? " " + left : "") + (right != null ? " " + right : "") + "]";
     }
+
 }
