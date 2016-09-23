@@ -58,14 +58,27 @@ public class IntegerTreeNode {
         }
     }
 
-    // Question 1.2 asks for this complicated version first
+    public int depth() {
+        int leftDepth = 0;
+        int rightDepth = 0;
+        if (left != null) {
+            leftDepth = 1 + left.depth();
+        }
+        if (right != null) {
+            rightDepth = 1 + right.depth();
+        }
+        return leftDepth > rightDepth ? leftDepth : rightDepth;
+    }
+
+    // Question 1.2 - complicated version
     /*public String toString() {
         return "[" + value + " L" + (left != null ? left : "[]") + " R" + (right != null ? right : "[]") + "]";
     }*/
 
-    // Question 1.2 then wants this simplified version
+    // Question 1.2 - simplified version
     public String toString() {
-        return "[" + value + (left != null ? " " + left : "") + (right != null ? " " + right : "") + "]";
+        return "[" + value + (left != null ? " " + left : "")
+                + (right != null ? " " + right : "") + "]";
     }
 
 }
