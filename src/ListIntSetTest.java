@@ -7,7 +7,7 @@ public class ListIntSetTest {
     }
 
     private void launch() {
-        ListIntSet set = new ListIntSet(100);
+        IntSet set = new ListIntSet(100);
 
         set.add(33);
         set.add(117);

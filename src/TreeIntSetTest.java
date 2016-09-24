@@ -7,7 +7,7 @@ public class TreeIntSetTest {
     }
 
     private void launch() {
-        TreeIntSet set = new TreeIntSet(100);
+        IntSet set = new TreeIntSet(100);
 
         set.add(33);
         set.add(117);
