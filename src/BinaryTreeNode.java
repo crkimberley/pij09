@@ -3,12 +3,16 @@
  */
 public class BinaryTreeNode {
 
-    private final char value;
-    private final BinaryTreeNode leftBinaryTreeNode;
-    private final BinaryTreeNode rightBinaryTreeNode;
+    private String value;
+    private BinaryTreeNode leftBinaryTreeNode;
+    private BinaryTreeNode rightBinaryTreeNode;
 
     public BinaryTreeNode(char value, BinaryTreeNode leftBinaryTreeNode, BinaryTreeNode rightBinaryTreeNode) {
-        this.value = value;
+        this(""+value, leftBinaryTreeNode, rightBinaryTreeNode);
+    }
+
+    public BinaryTreeNode(String value, BinaryTreeNode leftBinaryTreeNode, BinaryTreeNode rightBinaryTreeNode) {
+        this.value = "" + value;
         this.leftBinaryTreeNode = leftBinaryTreeNode;
         this.rightBinaryTreeNode = rightBinaryTreeNode;
     }
