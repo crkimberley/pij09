@@ -4,21 +4,21 @@
 public class BinaryTreeNode {
 
     private String value;
-    private BinaryTreeNode leftBinaryTreeNode;
-    private BinaryTreeNode rightBinaryTreeNode;
+    private BinaryTreeNode left;
+    private BinaryTreeNode right;
 
-    public BinaryTreeNode(char value, BinaryTreeNode leftBinaryTreeNode, BinaryTreeNode rightBinaryTreeNode) {
-        this(""+value, leftBinaryTreeNode, rightBinaryTreeNode);
+    public BinaryTreeNode(char value, BinaryTreeNode left, BinaryTreeNode right) {
+        this(Character.toString(value), left, right);
     }
 
-    public BinaryTreeNode(String value, BinaryTreeNode leftBinaryTreeNode, BinaryTreeNode rightBinaryTreeNode) {
-        this.value = "" + value;
-        this.leftBinaryTreeNode = leftBinaryTreeNode;
-        this.rightBinaryTreeNode = rightBinaryTreeNode;
+    public BinaryTreeNode(String value, BinaryTreeNode left, BinaryTreeNode right) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
     }
 
     public String toString() {
-        return "[" + value + " L" + (leftBinaryTreeNode != null ? leftBinaryTreeNode : "[]")
-                + " R" + (rightBinaryTreeNode != null ? rightBinaryTreeNode : "[]") + "]";
+        return "[" + value + " L" + (left != null ? left : "[]")
+                + " R" + (right != null ? right : "[]") + "]";
     }
 }

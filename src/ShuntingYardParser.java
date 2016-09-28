@@ -1,5 +1,7 @@
 import java.util.*;
 
+import static java.lang.Character.isDigit;
+
 /**
  * @author crkimberley on 28/09/2016.
  */
@@ -9,30 +11,31 @@ public class ShuntingYardParser {
     private Map<Character, Operator> operatorMap;
 
     private static void addNode(Stack<BinaryTreeNode> stack, char operator) {
-        BinaryTreeNode rightBinaryTreeNode = stack.pop();
-        BinaryTreeNode leftBinaryTreeNode = stack.pop();
-        stack.push(new BinaryTreeNode(operator, leftBinaryTreeNode, rightBinaryTreeNode));
+        BinaryTreeNode right = stack.pop();
+        BinaryTreeNode left = stack.pop();
+        stack.push(new BinaryTreeNode(operator, left, right));
     }
 
     public ShuntingYardParser() {
+        // Define mathematical operators
         operators = new ArrayList<Operator>();
-        operators.add(new Operator('^', true, 4));
-        operators.add(new Operator('*', false, 3));
-        operators.add(new Operator('/', false, 3));
-        operators.add(new Operator('+', false, 2));
-        operators.add(new Operator('-', false, 2));
+        operators.add(new Operator('*', 2));
+        operators.add(new Operator('/', 2));
+        operators.add(new Operator('+', 1));
+        operators.add(new Operator('-', 1));
         operatorMap = new HashMap<Character, Operator>();
-        for (Operator o : operators) {
-            operatorMap.put(o.getSymbol(), o);
+        for (Operator operator : operators) {
+            operatorMap.put(operator.getSymbol(), operator);
         }
     }
 
-    public BinaryTreeNode convertInfixNotationToAST(String input) {
+    public BinaryTreeNode expressionToTree(String input) {
         Stack<Character> operatorStack = new Stack<Character>();
         Stack<BinaryTreeNode> operandStack = new Stack<BinaryTreeNode>();
         char[] chars = input.toCharArray();
         main:
-        for (char c : chars) {
+        for (int i=0; i<chars.length; i++) {
+            char c = chars[i];
             char popped;
             switch (c) {
                 case ' ':
@@ -51,22 +54,25 @@ public class ShuntingYardParser {
                     }
                 default:
                     if (operatorMap.containsKey(c)) {
-                        final Operator o1 = operatorMap.get(c);
-                        Operator o2;
-                        while (!operatorStack.isEmpty() && null != (o2 =
+                        Operator operator1 = operatorMap.get(c);
+                        Operator operator2;
+                        while (!operatorStack.isEmpty() && null != (operator2 =
                                 operatorMap.get(operatorStack.peek()))) {
-                            if ((!o1.isRightAssociative() &&
-                                    0 == o1.comparePrecedence(o2)) ||
-                                    o1.comparePrecedence(o2) < 0) {
+                            if (operator1.comparePrecedence(operator2) <= 0) {
                                 operatorStack.pop();
-                                addNode(operandStack, o2.getSymbol());
+                                addNode(operandStack, operator2.getSymbol());
                             } else {
                                 break;
                             }
                         }
                         operatorStack.push(c);
                     } else {
-                        operandStack.push(new BinaryTreeNode(c, null, null));
+                        StringBuilder numberBuilder = new StringBuilder(Character.toString(c));
+                        while ((i+1) < chars.length && isDigit(chars[i+1])) {
+                            numberBuilder.append(chars[i+1]);
+                            i++;
+                        }
+                        operandStack.push(new BinaryTreeNode(numberBuilder.toString(), null, null));
                     }
                     break;
             }
