@@ -8,7 +8,7 @@ public class BinaryTreeNodeTest {
     }
 
     private void launch() {
-        String[] expressions = {"(3 + 3) * (8 - 11 * 2)", "123 + 456", "2/3*4"};
+        String[] expressions = {"(3 + 3) * (8 - 11 * 2)", "123 + 456", "2/3*4", "235+31*78+24/97"};
         for (String expression : expressions) {
             BinaryTreeNode tree = BinaryTreeNode.mathExpressionToTree(expression);
             System.out.println("Mathematical expression: " + expression + "\nAbstract Syntax Tree: " + tree);

@@ -20,12 +20,6 @@ public class BinaryTreeNode {
         this.right = right;
     }
 
-    public BinaryTreeNode() {
-        value = null;
-        left = null;
-        right = null;
-    }
-
     public String toString() {
         return "[" + value + " L" + (left != null ? left : "[]")
                 + " R" + (right != null ? right : "[]") + "]";
@@ -35,6 +29,13 @@ public class BinaryTreeNode {
         return new ShuntingYardParser().expressionToTree(expression);
     }
 
+    /**
+     * Dijkstra's Shunting-Yard algorithm is using for converting the mathematical expression
+     * in a given String to a BinaryNodeTree
+     *
+     * Basis for implementation is taken from
+     * https://www.klittlepage.com/2013/12/22/twelve-days-2013-shunting-yard-algorithm/
+     */
     private static class ShuntingYardParser {
 
         private Collection<Operator> operators;
