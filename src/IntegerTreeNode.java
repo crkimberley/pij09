@@ -123,53 +123,36 @@ public class IntegerTreeNode {
         }
         root = front;
 
-        // Convert vine to balanced tree - using Day–Stout–Warren (DSW) algorithm
+        // Convert vine to balanced tree
+        // using Day-Stout-Warren algorithm
         IntegerTreeNode pseudoRoot = new IntegerTreeNode();
+        int backboneLength = size - 1;
         pseudoRoot.right = root;
-        int leaves = size + 1 - (2 * log2(size + 1));
-        compress(pseudoRoot, leaves);
-        size = size - leaves;
-        while (size > 1) {
-            compress(pseudoRoot, size / 2);
-            size = size / 2;
+        for (int i=backboneLength/2; i>0; i=backboneLength/2) {
+            IntegerTreeNode temp = pseudoRoot;
+            for (int j=0; j<i; j++) {
+                // Rotate left
+                IntegerTreeNode child = temp.right;
+                temp.right = child.right;
+                temp = temp.right;
+                child.right = temp.left;
+                temp.left = child;
+            }
+            backboneLength = backboneLength - i - 1;
         }
         return pseudoRoot.right;
     }
 
-    private void compress(IntegerTreeNode root, int count) {
-        IntegerTreeNode temp, child;
-        temp = root;
-        // Rotate left
-        for (int i=1; i<=count; i++) {
-            child = temp.right;
-            temp.right = child.right;
-            temp = temp.right;
-            child.right = temp.left;
-            temp.left = child;
-        }
-    }
-
-    private int log2(int x) {
-        int y,z;
-        // Calculate floor log2
-        z = x;
-        y = -1;
-        while (z > 0) {
-            // signed right bit shift
-            z >>= 1;
-            y++;
-        }
-        return y;
-    }
-
     public void inOrderTraversal() {
+        System.out.println("\nIn Order traversal of: " + this);
         inOrderTraversal(this);
+        System.out.println();
     }
 
     public void inOrderTraversal(IntegerTreeNode node) {
         if (node != null) {
             inOrderTraversal(node.left);
-            System.out.println("Node: " + node.value + "  Left: " + (node.left != null ? node.left.value : "null")
+            System.out.println("\tNode: " + node.value + "  Left: " + (node.left != null ? node.left.value : "null")
                     + "  Right: " + (node.right != null ? node.right.value : "null"));
             inOrderTraversal(node.right);
         }

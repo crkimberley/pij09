@@ -45,13 +45,24 @@ public class IntegerTreeScript {
         tree3.add(8);
         tree3.add(9);
         tree3.add(10);
+        tree3.add(11);
+        tree3.add(12);
+        tree3.add(13);
+        tree3.add(14);
+        tree3.add(15);
+        tree3.add(16);
+        tree3.add(17);
+        tree3.add(18);
+        tree3.add(19);
+        tree3.add(20);
 
         System.out.println(tree3);
         tree3.depth();
         tree3.inOrderTraversal();
-        IntegerTreeNode reTree3 = tree3.rebalance();
-        System.out.println(reTree3);
-        reTree3.inOrderTraversal();
+        tree3 = tree3.rebalance();
+        System.out.println(tree3);
+        tree3.inOrderTraversal();
+
 
 
     }
