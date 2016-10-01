@@ -20,6 +20,10 @@ public class BinaryTreeNode {
         this.right = right;
     }
 
+    public String getValue() {
+        return value;
+    }
+
     public String toString() {
         return "[" + value + " L" + (left != null ? left : "[]")
                 + " R" + (right != null ? right : "[]") + "]";
@@ -136,6 +140,20 @@ public class BinaryTreeNode {
             public String toString() {
                 return Character.toString(symbol);
             }
+        }
+    }
+
+    public List<BinaryTreeNode> inOrderTreeToList() {
+        List<BinaryTreeNode> list = new LinkedList<BinaryTreeNode>();
+        inOrderTraversal(this, list);
+        return list;
+    }
+
+    public void inOrderTraversal(BinaryTreeNode node, List<BinaryTreeNode> list) {
+        if (node != null) {
+            inOrderTraversal(node.left, list);
+            list.add(node);
+            inOrderTraversal(node.right, list);
         }
     }
 }
