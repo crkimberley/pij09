@@ -14,11 +14,13 @@ public class BinaryTreeNodeTest {
         for (String expression : expressions) {
             BinaryTreeNode tree = BinaryTreeNode.mathExpressionToTree(expression);
             System.out.println("Mathematical expression: " + expression + "\nAbstract Syntax Tree: " + tree);
+            /*
             List<BinaryTreeNode> list = tree.inOrderTreeToList();
             System.out.print("list: ");
             for (BinaryTreeNode node : list) {
                 System.out.print(node.getValue() + " ");
             }
+            */
             System.out.println("\n");
         }
     }

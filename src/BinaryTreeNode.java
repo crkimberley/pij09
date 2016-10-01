@@ -142,18 +142,4 @@ public class BinaryTreeNode {
             }
         }
     }
-
-    public List<BinaryTreeNode> inOrderTreeToList() {
-        List<BinaryTreeNode> list = new LinkedList<BinaryTreeNode>();
-        inOrderTraversal(this, list);
-        return list;
-    }
-
-    public void inOrderTraversal(BinaryTreeNode node, List<BinaryTreeNode> list) {
-        if (node != null) {
-            inOrderTraversal(node.left, list);
-            list.add(node);
-            inOrderTraversal(node.right, list);
-        }
-    }
 }
