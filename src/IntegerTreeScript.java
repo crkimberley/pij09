@@ -61,9 +61,29 @@ public class IntegerTreeScript {
         tree3.inOrderTraversal();
         tree3 = tree3.rebalance();
         System.out.println(tree3);
+
+        tree3 = tree3.remove(8);
+        System.out.println(tree3);
         tree3.inOrderTraversal();
 
+        System.out.println(tree3);
+        tree3 = tree3.remove(13);
+        System.out.println(tree3);
+        tree3.inOrderTraversal();
 
+        System.out.println(tree3);
+        tree3 = tree3.remove(19);
+        System.out.println(tree3);
+        tree3.inOrderTraversal();
 
+        System.out.println(tree3);
+        tree3 = tree3.remove(12);
+        System.out.println(tree3);
+        tree3.inOrderTraversal();
+
+        System.out.println(tree3);
+        tree3 = tree3.remove(21);
+        System.out.println(tree3);
+        tree3.inOrderTraversal();
     }
 }

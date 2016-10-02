@@ -143,6 +143,52 @@ public class IntegerTreeNode {
         return pseudoRoot.right;
     }
 
+    public IntegerTreeNode remove(int value) {
+        System.out.println("Looking for " + value);
+        IntegerTreeNode a = this, b = null, c, d, root = this;
+        // Finding node to be deleted
+        while (a != null && a.value != value) {
+            b = a;
+            a = value < a.value ? a.left : a.right;
+        }
+        if (a == null) {
+            System.out.println(value + " not found");
+        } else {
+            // If just one non-empty subtree, it replaces a
+            // a points to the node to be deleted and b to its parent, unless a==root
+            // Now find c (perhaps null) to replace a and prepare for linking b to it
+            if (a.left == null) {
+                c = a.right;
+            } else if (a.right == null) {
+                c = a.left;
+            } else {
+                // Finding the in order successor of a
+                // a has two non-empty subtrees, so make c=insucc(a)
+                // Note: insucc(a).left == null
+                c = a.right;
+                if (c.left != null) {
+                    do {
+                        d = c;
+                        c = c.left;
+                    } while (c.left != null);
+                    // Now link c's right subtree to c's parent d
+                    d.left = c.right;
+                    c.right = a.right;
+                }
+                c.left = a.left;    // c inherits a's subtrees
+            }
+            // Lastly link b to c
+            if (a == root) {
+                root = c;
+            } else if (b.left == a) {
+                b.left = c;
+            } else {
+                b.right = c;
+            }
+        }
+        return root;
+    }
+
     public void inOrderTraversal() {
         System.out.println("\nIn Order traversal of: " + this);
         inOrderTraversal(this);
